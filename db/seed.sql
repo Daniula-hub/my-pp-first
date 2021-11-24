@@ -52,3 +52,18 @@ CREATE TABLE exercise_cart_mix (
     exercise_id INT REFERENCES exercises(exercise_id),
     quantity INT
 );
+
+CREATE TABLE carts (
+    cart_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(user_id),
+    active BOOLEAN,
+    cart_type VARCHAR(200)
+);
+
+CREATE TABLE exercise_cart_mix (
+    exercise_cart_id SERIAL PRIMARY KEY,
+    cart_id INT REFERENCES carts(cart_id),
+    exercise_name VARCHAR(200),
+    exercise_id INT REFERENCES exercises(exercise_id),
+    quantity INT
+);
