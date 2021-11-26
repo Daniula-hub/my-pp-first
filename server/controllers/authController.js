@@ -51,7 +51,6 @@ module.exports = {
       return res.status(404).send("Cart Not Found");
     };
     delete user.password;
-    console.log('ayyyy', cart);
     user.cart_id = cart[0].cart_id;
     const data = { 
       user: user,
@@ -60,7 +59,6 @@ module.exports = {
     req.session.user=user[0];
     req.session.user.cart_id= cart[0].cart_id;
     req.session.cart=cart[0];
-    console.log('uuuyyyy', req.session);
     
     return res.status(200).send(data);
   },

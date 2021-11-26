@@ -16,13 +16,19 @@ module.exports = {
      return res.status(200).send(cartItems);
   },
 
-  addToCart: (req, res) => {
+  addToCart: async (req, res) => {
     const db = req.app.get("db");
-    const { user, cart } = req.session;
-    const { exercise_id } = req.params;
-    const {exercise} = req.body;
+    const { user } = req.session;
     if (!user) {
       return res.status(500).send("User not logged in");
+    }
+    const items = await db.cart.get_cart_items(user.cart_id);
+    const { exercise_id } = req.params;
+    const {exercise} = req.body;
+    let validation = items.find(item => item.exercise_id === exercise_id )
+    console.log('result', validation)
+    if(validation){
+      return res.status(500).send('This exercise was already added to the cart!')
     }
     db.cart
       .add_to_cart(user.cart_id, exercise.exercise_name, exercise_id)
@@ -56,7 +62,7 @@ module.exports = {
     const db = req.app.get("db");
     const { user } = req.session;
     const cart_type = "future_exercises";
-    let cart_id = undefined;
+    let cart_id = user?.cart_id;
     const validateCart = db.cart.validate_cart(user.user_id, cart_type); // checks if there is a cart for future exercise//
     if (validateCart.length <= 0) {
       cart_id = db.cart.create_cart(user.user_id, cart_type); //creates new cart for future exercise //
@@ -67,7 +73,7 @@ module.exports = {
       }
     }
     const { exercise } = req.params;
-    const addEx = db.cart.add_exercise_future_exercises_cart(
+    const addEx = db.cart.future_exercises_cart(
       cart_id,
       exercise.exercise_name,
       exercise.exercise_id,

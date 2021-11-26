@@ -1,12 +1,12 @@
 import React from "react";
-import "./HomeButton.css";
+import "./AuthButton.css";
 import { Link } from "react-router-dom";
 
 const STYLES = ["btn--primary", "btn--outline"];
 
 const SIZES = ["btn--medium", "btn--large"];
 
-export const HomeButton = ({
+export const AuthButton = ({
   children,
   type,
   onClick,
@@ -20,7 +20,7 @@ export const HomeButton = ({
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
 
   return (
-    <Link to="/sign-in" className="btn-mobile">
+    <Link to="/auth" className="btn-mobile">
       <button
         className={`btn ${checkButtonStyle} ${checkButtonSize}`}
         onClick={onClick}

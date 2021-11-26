@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import { HomeButton } from "./HomeButton";
+import { AuthButton } from "./buttons/AuthButton";
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -32,7 +32,7 @@ function Navbar() {
           </div>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
-              <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+              <Link to="/home" className="nav-links" onClick={closeMobileMenu}>
                 Home
               </Link>
             </li>
@@ -50,19 +50,11 @@ function Navbar() {
                 Cart
               </Link>
             </li>
-            <li className="nav-item">
-                  <Link to="/sign-in" className="nav-links" onClick={closeMobileMenu}>Sign In</Link>
-            </li>
           </ul>
           {button && (
-            <HomeButton buttonStyle="btn--outline">SIGN IN</HomeButton>
+            <AuthButton buttonStyle="btn--outline">SIGN IN</AuthButton>
           )}
         </div>
-        {/* <h1>The Workout App</h1> */}
-        <Link to="/">Dasboard</Link>
-        <Link to="auth">Auth</Link>
-        <Link to="/exercises">Exercises</Link>
-        <Link to="/cart">Cart</Link>
       </nav>
     </>
   );

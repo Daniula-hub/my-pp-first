@@ -28,30 +28,16 @@ const Cart = (props) => {
   };
 
   const handleSaveForLater = async (exercise) => {
-    const user = undefined;
     let additionalExercise = undefined;
+    
     axios
-      .get("/api/auth/getUser")
-      .then((res) => {
-        user = res.data;
-        dispatch(setCart(res.data));
-      })
-      .catch((err) =>
-        console.log("There was an error on handleSaveForLater: ", err)
-      );
-    if (!user) {
-      return null;
-    }
-    axios
-      .put(`/api/cart/createFutureExercises/${exercise}`)
+      .put(`/api/cart/createFutureExercises/${exercise.exercise_id}`)
       .then((res) => {
         additionalExercise = res.data;
       })
       .catch((err) =>
         console.log(
-          "There was an error creating a cart for Future Exercises: ",
-          err
-        )
+          "There was an error creating a cart for Future Exercises: ", err)
       );
     return additionalExercise ? additionalExercise : null;
   };
@@ -61,20 +47,18 @@ const Cart = (props) => {
       <h1>Cart Page</h1>
       {cart.map((exercise) => {
         return (
-          <div>
             <div key={exercise.exercise_id}>
               <h4>{exercise.exercise_name}</h4>
               <h5>Qty: {exercise.quantity}</h5>
               <button
                 onClick={() => handleDeleteFromCart(exercise.exercise_id)}
               >
-                X
+                Delete
               </button>
               <button onClick={() => handleSaveForLater(exercise)}>
                 Save For Later
               </button>
             </div>
-          </div>
         );
       })}
       <FutureWorkouts cart={cart} />

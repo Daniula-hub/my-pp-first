@@ -4,7 +4,7 @@ import { useState } from "react";
 import { setUser } from "../redux/authReducer";
 import { setCart } from "../redux/cartReducer";
 import { connect } from "react-redux";
-import Dash from "./Dash";
+import Home from "./Home";
 
 
 const Auth = (props) => {
@@ -18,9 +18,9 @@ const Auth = (props) => {
       .post("/auth/register", { email, password })
       .then((res) => {
         props.setUser(res.data.user);
+        props.history.push("/home");
         props.setCart(res.data.cart);
         // setLoggedUser({...res.data})
-        props.history.push("/welcome");
       })
       .catch((err) => console.log(err));
   };
@@ -38,7 +38,7 @@ const Auth = (props) => {
  
     return (
       <div>
-        <h1>Auth</h1>
+        <h1>Hola</h1>
           <input value={email} onChange={(e) => setEmail(e.target.value)} />
           <input value={password} onChange={(e) => setPassword(e.target.value)} />
           <button onClick={handleLogin}>Login</button>
