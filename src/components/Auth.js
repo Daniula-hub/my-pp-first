@@ -4,23 +4,19 @@ import { useState } from "react";
 import { setUser } from "../redux/authReducer";
 import { setCart } from "../redux/cartReducer";
 import { connect } from "react-redux";
-import Home from "./Home";
 
 
 const Auth = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const { cart } = useSelector((store) => store.cartReducer);
-  // const [loggedUser, setLoggedUser] = useState(undefined);
 
   const handleRegister = () => {
     axios
       .post("/auth/register", { email, password })
       .then((res) => {
         props.setUser(res.data.user);
+        setCart(res.data.cart);
         props.history.push("/home");
-        props.setCart(res.data.cart);
-        // setLoggedUser({...res.data})
       })
       .catch((err) => console.log(err));
   };
@@ -29,9 +25,8 @@ const Auth = (props) => {
       .post("/auth/login", { email, password })
       .then((res) => {
         props.setUser(res.data.user);
+        setCart(res.data.cart);
         props.history.push("/exercises");
-        props.setCart(res.data.cart);
-        // setLoggedUser({...res.data})
       })
       .catch((err) => console.log(err));
   };
@@ -43,14 +38,8 @@ const Auth = (props) => {
           <input value={password} onChange={(e) => setPassword(e.target.value)} />
           <button onClick={handleLogin}>Login</button>
           <button onClick={handleRegister}>Register</button>
-        {/* {!loggedUser ? (
-          <div>
-          
-          </div>
-        ) : <Dash loggedUser={loggedUser} /> }  */}
       </div>
-    );  
+    );
 };
 
-// export default Auth;
 export default connect(null, { setUser })(Auth);

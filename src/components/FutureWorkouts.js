@@ -19,6 +19,8 @@ class FutureWorkouts extends React.Component {
     const { futureWorkoutsList } = this.state;
     return (
       <div>
+        <nav className='futureworkouts-container'>
+          <h1>Future Workouts</h1>
         {futureWorkoutsList.map((exercise) => {
           return (
             <div>
@@ -29,6 +31,7 @@ class FutureWorkouts extends React.Component {
             </div>
           );
         })}
+        </nav>
       </div>
     );
   };

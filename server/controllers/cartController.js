@@ -25,9 +25,7 @@ module.exports = {
     const items = await db.cart.get_cart_items(user.cart_id);
     const { exercise_id } = req.params;
     const {exercise} = req.body;
-    let validation = items.find(item => item.exercise_id === exercise_id )
-    console.log('result', validation)
-    if(validation){
+    if(items.find(item => item.exercise_id == exercise_id)){
       return res.status(500).send('This exercise was already added to the cart!')
     }
     db.cart
