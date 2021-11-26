@@ -12,7 +12,7 @@ const Cart = (props) => {
     axios
       .get("/api/cart")
       .then((res) => {
-        console.log(res.data);
+        console.log('cart', res.data);
         dispatch(setCart(res.data));
       })
       .catch((err) => console.log(err));
@@ -34,7 +34,7 @@ const Cart = (props) => {
       .get("/api/auth/getUser")
       .then((res) => {
         user = res.data;
-        //   dispatch(setCart(res.data));
+        dispatch(setCart(res.data));
       })
       .catch((err) =>
         console.log("There was an error on handleSaveForLater: ", err)

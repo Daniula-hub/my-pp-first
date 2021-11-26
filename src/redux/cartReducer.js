@@ -10,7 +10,7 @@ const SET_CART = "SET_CART";
 export function setCart(cart) {
   return {
     type: SET_CART,
-    payload: cart,
+    payload: cart
   };
 }
 

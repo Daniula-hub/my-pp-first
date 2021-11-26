@@ -14,12 +14,24 @@ export function setUser (user){
     }
 }
 
+// const GET_USER = 'GET_USER';
+
+// export function getUser(){
+//     return {
+//         type: GET_USER
+//     }
+// }
+
 // reducer
 export default function authReducer(state = initialState, action){
     switch (action.type){
         case SET_USER:
             return {...state, user: action.payload}
-            default:
-                return {...state}
+        // case GET_USER:
+        //     return {
+        //         ...state
+        //     }
+        default:
+            return {...state}
     }
 }

@@ -1,32 +1,33 @@
 module.exports = {
-  getCart: (req, res) => {
+  getCart: async (req, res) => {
     const db = req.app.get("db");
-    const { user } = req.session;
+    const { user, cart } = req.session;
     if (!user) {
-      console.log(user);
       return res.status(404).send("User not logged in");
     }
-    db.cart
-      .get_cart_items(user.cart_id)
-      .then((cartExercises) => {
-        res.status(200).send(cartExercises);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).send(err);
-      });
+
+    if(!cart){
+      return res.status(404).send("Cart Not Found");
+    };
+    const cartItems = await db.cart.get_cart_items(user.cart_id);
+     if(cartItems.length <= 0){
+      return res.status(404).send("Items not found");
+     }
+     return res.status(200).send(cartItems);
   },
+
   addToCart: (req, res) => {
     const db = req.app.get("db");
-    const { user } = req.session;
+    const { user, cart } = req.session;
     const { exercise_id } = req.params;
+    const {exercise} = req.body;
     if (!user) {
       return res.status(500).send("User not logged in");
     }
     db.cart
-      .add_to_cart(user.cart_id, exercise_id)
-      .then(() => {
-        res.sendStatus(200);
+      .add_to_cart(user.cart_id, exercise.exercise_name, exercise_id)
+      .then((cartItems) => {
+        res.status(200).send(cartItems);
       })
       .catch((err) => {
         console.log(err);
