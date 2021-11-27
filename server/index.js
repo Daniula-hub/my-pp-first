@@ -52,10 +52,11 @@ app.get("/api/exercises", exerciseCtrl.getExercises);
 
 // cart
 app.get("/api/cart", cartCtrl.getCart);
-app.post("/api/cart/:exercise_id", cartCtrl.addToCart);      // ej: req.params.exercise_id
+app.get("/api/futureExercises/:cart_id", cartCtrl.getCart);
+app.post("/api/cart/:exercise_id", cartCtrl.addToCart);// ej: req.params.exercise_id
+app.post("/api/createFutureExercises", cartCtrl.createFutureExercises);
 app.delete("/api/cart/:exercise_id", cartCtrl.deleteItemFromCart);
-app.put("/api/cart/createFutureExercises/:exercise", cartCtrl.createFutureExercises);
 
-app.listen(SERVER_PORT, () =>
-  console.log(`Server listening on ${SERVER_PORT}`)
+
+app.listen(SERVER_PORT, () => console.log(`Server listening on ${SERVER_PORT}`)
 );

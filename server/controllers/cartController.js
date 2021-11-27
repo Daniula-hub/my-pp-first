@@ -8,8 +8,9 @@ module.exports = {
 
     if(!cart){
       return res.status(404).send("Cart Not Found");
-    };
-    const cartItems = await db.cart.get_cart_items(user.cart_id);
+    }
+    const {cart_id} = req.params;
+    const cartItems = await db.cart.get_cart_items(cart_id ? cart_id : user.cart_id);
      if(cartItems.length <= 0){
       return res.status(404).send("Items not found");
      }
@@ -24,12 +25,10 @@ module.exports = {
     }
     const items = await db.cart.get_cart_items(user.cart_id);
     const { exercise_id } = req.params;
-    const {exercise} = req.body;
     if(items.find(item => item.exercise_id == exercise_id)){
       return res.status(500).send('This exercise was already added to the cart!')
     }
-    db.cart
-      .add_to_cart(user.cart_id, exercise.exercise_name, exercise_id)
+    db.cart.add_to_cart(user.cart_id, exercise_id)
       .then((cartItems) => {
         res.status(200).send(cartItems);
       })
@@ -56,28 +55,31 @@ module.exports = {
       });
   },
 
-  createFutureExercises: (req, res) => {
+  createFutureExercises: async (req, res) => {
     const db = req.app.get("db");
     const { user } = req.session;
+    if (!user) {
+      return res.status(500).send("User not logged in");
+    }
     const cart_type = "future_exercises";
-    let cart_id = user?.cart_id;
-    const validateCart = db.cart.validate_cart(user.user_id, cart_type); // checks if there is a cart for future exercise//
-    if (validateCart.length <= 0) {
-      cart_id = db.cart.create_cart(user.user_id, cart_type); //creates new cart for future exercise //
+    let cart_id = await db.cart.get_cartId_by_type(user.user_id, cart_type); // checks if there is a cart for future exercise//
+    if (cart_id.length <= 0) {
+      cart_id = await db.cart.create_cart(user.user_id, cart_type); //creates new cart for future exercise //
       if (!cart_id) {
-        return res
-          .status(500)
-          .send("Cart for Future Exercises could not be created");
+        return res.status(500).send("Cart for Future Exercises could not be created");
       }
     }
-    const { exercise } = req.params;
-    const addEx = db.cart.future_exercises_cart(
-      cart_id,
-      exercise.exercise_name,
-      exercise.exercise_id,
-      exercise.quantity
-    );
-    if (addEx.lenght <= 0) {
+    cart_id = cart_id[0]?.cart_id; //Extracts cart_id from the result of get_cartId_by_type
+    const { exercise } = req.body;
+    if (!exercise) {
+      return res.status(404).send("Exercise not found.");
+    }
+    const exerciseExists = await db.cart.validate_future_exercises(cart_id, exercise.exercise_id);
+    if (exerciseExists.length > 0) {
+      return res.status(500).send("Exercise already exists in your Save for Later Cart.");
+    }
+    const addEx = await db.cart.future_exercises_cart(cart_id, exercise.exercise_id);
+    if (addEx.length <= 0) {
       return res.status(500).send("Could not add Future Exercise");
     }
     return res.status(200).send(addEx);

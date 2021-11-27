@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import FutureWorkouts from "./FutureWorkouts";
@@ -7,12 +7,12 @@ import { setCart } from "../redux/cartReducer";
 const Cart = (props) => {
   const { cart } = useSelector((store) => store.cartReducer);
   const dispatch = useDispatch();
+  const [futureExercises, setFutureExercises] = useState([]);
 
   useEffect(() => {
     axios
       .get("/api/cart")
       .then((res) => {
-        console.log('cart', res.data);
         dispatch(setCart(res.data));
       })
       .catch((err) => console.log(err));
@@ -27,19 +27,15 @@ const Cart = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const handleSaveForLater = async (exercise) => {
-    let additionalExercise = undefined;
-    
+  const handleSaveForLater = (exercise) => {
     axios
-      .put(`/api/cart/createFutureExercises/${exercise.exercise_id}`)
+      .post("/api/createFutureExercises", { exercise })
       .then((res) => {
-        additionalExercise = res.data;
+        setFutureExercises(res.data);
       })
       .catch((err) =>
-        console.log(
-          "There was an error creating a cart for Future Exercises: ", err)
+        console.log("There was an error creating a cart for Future Exercises: ", err)
       );
-    return additionalExercise ? additionalExercise : null;
   };
 
   return (
@@ -48,8 +44,7 @@ const Cart = (props) => {
       {cart.map((exercise) => {
         return (
             <div key={exercise.exercise_id}>
-              <h4>{exercise.exercise_name}</h4>
-              <h5>Qty: {exercise.quantity}</h5>
+              <h4>{exercise.name}</h4>
               <button
                 onClick={() => handleDeleteFromCart(exercise.exercise_id)}
               >
@@ -58,10 +53,11 @@ const Cart = (props) => {
               <button onClick={() => handleSaveForLater(exercise)}>
                 Save For Later
               </button>
+              <img src={`${exercise.gifurl}`} />
             </div>
         );
       })}
-      <FutureWorkouts cart={cart} />
+      {futureExercises?.length > 0 ? <FutureWorkouts futureExercises={futureExercises} /> : null}
     </div>
   );
 };

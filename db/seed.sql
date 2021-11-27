@@ -48,9 +48,7 @@ CREATE TABLE exercise_cart_mix (
 - CREATE TABLE exercise_cart_mix (
     exercise_cart_id SERIAL PRIMARY KEY,
     cart_id INT REFERENCES carts(cart_id),
-    exercise_name VARCHAR(200),
     exercise_id INT REFERENCES exercises(exercise_id),
-    quantity INT
 );
 
 CREATE TABLE carts (

@@ -1,40 +1,50 @@
-import React from "react";
 import axios from "axios";
+import { useState, useEffect } from "react";
 
-class FutureWorkouts extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cart: props.cart,
-      futureWorkoutsList: [...props.cart],
-    };
-  }
+const FutureWorkouts = (props) => {
+    const [futureExercisesList, setFutureExercisesList] = useState([props.futureExercises]);
 
-  AddFutureWorkouts = () => {
-    let cart = this.state.cart;
-    this.setState({ futureWorkoutsList: cart });
+  useEffect(() => {
+    const example = props.futureExercises.pop();
+    if (example) {
+      axios
+      .get(`/api/futureExercises/${example.cart_id}`)
+        .then((res) => {
+          setFutureExercisesList(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, []);
+
+  const handleDeleteFromCart = (exercise_id) => {
+    axios
+      .delete(`/api/cart/${exercise_id}`)
+      .then((res) => {
+        setFutureExercisesList(res.data);
+      })
+      .catch((err) => console.log(err));
   };
 
-  render = () => {
-    const { futureWorkoutsList } = this.state;
     return (
       <div>
         <nav className='futureworkouts-container'>
           <h1>Future Workouts</h1>
-        {futureWorkoutsList.map((exercise) => {
+        {futureExercisesList.map((exercise) => {
           return (
-            <div>
-              <div key={exercise.exercise_id}>
-                <h4>{exercise.exercise_name}</h4>
-                <h5>Qty: {exercise.quantity}</h5>
-              </div>
+            <div key={exercise.exercise_id}>
+              <h4>{exercise.name}</h4>
+              <button
+                onClick={() => handleDeleteFromCart(exercise.exercise_id)}
+              >
+                Delete
+              </button>
+              <img src={`${exercise.gifurl}`} />
             </div>
           );
         })}
         </nav>
       </div>
     );
-  };
 }
 
 export default FutureWorkouts;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { AuthButton } from "./buttons/AuthButton";
@@ -6,6 +7,7 @@ import { AuthButton } from "./buttons/AuthButton";
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const { user } = useSelector((store) => store.auth);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -45,11 +47,12 @@ function Navbar() {
                 Exercises
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/cart" className="nav-links" onClick={closeMobileMenu}>
-                Cart
-              </Link>
-            </li>
+            {user ? <li className="nav-item">
+                      <Link to="/cart" className="nav-links" onClick={closeMobileMenu}>
+                        Cart
+                      </Link>
+                    </li> 
+              : null}
           </ul>
           {button && (
             <AuthButton buttonStyle="btn--outline">SIGN IN</AuthButton>

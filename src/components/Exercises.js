@@ -16,7 +16,7 @@ const Exercises = (props) => {
 
   const handleAddToCart = (exercise) => {
     axios
-      .post(`/api/cart/${exercise.exercise_id}`, {exercise})
+      .post(`/api/cart/${exercise.exercise_id}`)
       .then(() => console.log("Exercise added to cart!"))
       .catch((err) => console.log(err));
   };
@@ -27,8 +27,11 @@ const Exercises = (props) => {
       {exercises.map((exercise) => {
         return (
           <div key={exercise.exercise_id}>
-            <h4>{exercise.exercise_name}</h4>
-            <p>{exercise.exercise_info}</p>
+            <h4>{exercise.name}</h4>
+            <h3>{exercise.bodypart}</h3>
+            <h2>{exercise.target}</h2>
+            <p>{exercise.equipment}</p>
+            <img src={`${exercise.gifurl}`} />
             {props.user && (
               <button onClick={() => handleAddToCart(exercise)}>
                 Add To Cart
@@ -44,23 +47,3 @@ const Exercises = (props) => {
 const mapStateToProps = (store) => store.auth;
 
 export default connect(mapStateToProps)(Exercises);
-
-// import { setCart } from "../redux/cartReducer"; // en linea 4
-// const dispatch = useDispatch(); // en linea 7
-
-//  linea 17
-//  const handleToCart = (exercise_id) => {
-//     const exercise = cart.find((exercise) => exercise.exercise_id === exercise_id)
-//     console.log(exercise)
-//     if(!exercise){
-//         axios.post(`/api/cart/${exercise_id}`)
-//         .then(() => console.log ('success!'))
-//         .catch((err) => console.log(err))
-//     } else{
-//         axios.put(`/api/cart/${exercise_id}`, {quantity: exercise.quantity + 1})
-//         .then((res) => {
-//             dispatch(setCart(res.data))  //give us updated cart
-//         })
-//         .catch(err => console.log(err))
-//     }
-//  }
