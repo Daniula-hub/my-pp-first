@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Exercises.css";
+import { useSelector } from "react-redux";
 import { connect } from "react-redux";
 
 const Exercises = (props) => {
   const [exercises, setExercises] = useState([]);
+  const { user } = useSelector((store) => store.auth);
 
   useEffect(() => {
     axios
@@ -24,7 +26,7 @@ const Exercises = (props) => {
 
   return (
     <div>
-      <h1>Start by selecting the exercises you want for your program</h1>
+      {user ? <h1>Start by selecting the exercises you want for your program</h1> : null}
       {exercises.map((exercise) => {
         return (
           <div key={exercise.exercise_id}>

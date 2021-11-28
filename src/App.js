@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
+// import Home from './components/Home';
 import routes from './routes';
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
@@ -9,6 +10,7 @@ function App(){
     <>
     <Router>
     <Navbar />
+    {/* <Home /> */}
     <Switch>
     {routes}
     </Switch>

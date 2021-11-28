@@ -28,10 +28,11 @@ function Navbar() {
 
   return (
     <>
+  
       <nav className="navbar">
         <div className="navbar-container">
           <Link to="/" className="navbar-logo" onClick={closeMobileMenu} >
-          <i className="fas fa-dumbbell"></i> The Workout App  
+          <i className="fas fa-dumbbell"></i> <h2>The Workout App</h2>
           </Link>
           <div className="menu-icon" onClick={handleClick}>
             <i className={click ? "fas fa-times" : "fas fa-bars"} />
@@ -48,20 +49,14 @@ function Navbar() {
               </Link>
             </li>
             {user ? <li className="nav-item">
-                      <Link to="/yourpicks" className="nav-links" onClick={closeMobileMenu}>
-                        Your Picks
+                      <Link to="/yourExercises" className="nav-links" onClick={closeMobileMenu}>
+                        Your Chosen Exercises
                       </Link>
                     </li> 
             : null}
             {user ? <li className="nav-item">
                       <Link to="/programs" className="nav-links" onClick={closeMobileMenu}>
                         Programs
-                      </Link>
-                    </li> 
-            : null}
-            {user ? <li className="nav-item">
-                      <Link to="/cart" className="nav-links" onClick={closeMobileMenu}>
-                        Cart
                       </Link>
                     </li> 
             : null}

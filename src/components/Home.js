@@ -3,8 +3,8 @@ import "./Home.css";
 
 const Home = () => {
   return (
-    <div className='intro'>
-      <video src='./videos/wrk.mp4' autoPlay loop muted />
+   <div>
+      {/* <video src='./videos/wrk.mp4' autoPlay loop muted /> */}
       <h1>Welcome to the Workout App</h1>
 
       <p>Whether you’re an absolute beginner, intermediate, or advanced, The Workout App makes it simple to get in shape and stay in shape. Get results-focused knowledge on weight loss, strength, nutrition, and more.
@@ -14,18 +14,7 @@ const Home = () => {
         We believe fitness is for everyone. For every body. For life. </p>
       
       <h2>What are you waiting for?</h2>
-      {/* <div className='intro-btns'>
-        <Homebutton
-          className='btns'
-          buttonStyle='btn--outline'
-          buttonSize='btn--large'
-          >
-            GET STARTED
-        </Homebutton>
-
-      </div> */}
-
-    </div>
+      </div>
   );
 };
 
