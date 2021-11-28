@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "./Cart.css";
 import { useSelector, useDispatch } from "react-redux";
 import FutureWorkouts from "./FutureWorkouts";
 import { setCart } from "../redux/cartReducer";
+import CheckOut from './CheckOut';
 
 const Cart = (props) => {
   const { cart } = useSelector((store) => store.cartReducer);
@@ -40,23 +42,20 @@ const Cart = (props) => {
 
   return (
     <div>
-      <h1>Cart Page</h1>
+      <h1></h1>
       {cart.map((exercise) => {
         return (
             <div key={exercise.exercise_id}>
               <h4>{exercise.name}</h4>
-              <button
-                onClick={() => handleDeleteFromCart(exercise.exercise_id)}
-              >
-                Delete
-              </button>
+              <button onClick={() => handleDeleteFromCart(exercise.exercise_id)}> Delete </button>
               <button onClick={() => handleSaveForLater(exercise)}>
                 Save For Later
               </button>
-              <img src={`${exercise.gifurl}`} />
+              <img src={`${exercise.gifurl}`}/>
             </div>
         );
       })}
+      <CheckOut exercise={cart}/>
       {futureExercises?.length > 0 ? <FutureWorkouts futureExercises={futureExercises} /> : null}
     </div>
   );

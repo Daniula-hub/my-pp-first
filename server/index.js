@@ -40,6 +40,8 @@ app.use(
 
 app.use(express.json());
 
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
+
 // endpoints
 // auth
 app.post("/auth/register", authCtrl.register);
@@ -55,6 +57,33 @@ app.get("/api/cart", cartCtrl.getCart);
 app.get("/api/futureExercises/:cart_id", cartCtrl.getCart);
 app.post("/api/cart/:exercise_id", cartCtrl.addToCart);// ej: req.params.exercise_id
 app.post("/api/createFutureExercises", cartCtrl.createFutureExercises);
+app.post("/api/executePayment", async (req, res) => {
+  try {
+    console.log("Estoy aquí 1");
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: req.body.exercises.map(exercise => {
+        console.log("Estoy aquí");
+        return {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: exercise.name
+            },
+            unit_amount: req.body.price
+          },
+          quantity: 1
+        }
+      }),
+      mode: 'payment',
+      success_url: `${process.env.SERVER_URL}/succes.html`,
+      cancel_url: `${process.env.SERVER_URL}/cancel.html`
+    })
+    res.json({url: session.url})
+  } catch (error) {
+    console.log("Llegué al error: ", error);
+  }
+});
 app.delete("/api/cart/:exercise_id", cartCtrl.deleteItemFromCart);
 
 

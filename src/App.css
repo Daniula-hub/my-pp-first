@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -30,4 +30,49 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.home,
+.exercises,
+.cart,
+.sign-in {
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.exercises {
+  background-image: url('https://i5.walmartimages.com/asr/244f4c1b-4b46-48a5-a5dd-6b5bba43736b_1.fe22e96b2fa1b6b3e858970c4d8ea64a.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color:#fff;
+  font-size: 100px;
+}
+
+.cart {
+  background-image: url('https://media.istockphoto.com/photos/gym-background-fitness-weight-equipment-on-empty-dark-floor-picture-id1213615970?b=1&k=20&m=1213615970&s=170667a&w=0&h=nh10d-ra1w9MMU4UITmSIlvH9a9NX5vst2xRR8imEGs=');
+  background-position: center;
+  background-size: fill;
+  background-repeat: no-repeat;
+  color:#fff;
+  font-size: 100px;
+}
+
+.sign-in {
+  background-image: url('https://image.shutterstock.com/image-illustration/fitness-motivation-quotes-260nw-1142715902.jpg');
+  background-position: center;
+  background-size: fill;
+  background-repeat: no-repeat;
+  color:#fff;
+  font-size: 100px;
 }

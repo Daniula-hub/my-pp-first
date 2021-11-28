@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "./Exercises.css";
 import { connect } from "react-redux";
 
 const Exercises = (props) => {
@@ -23,20 +24,22 @@ const Exercises = (props) => {
 
   return (
     <div>
-      <h1>The Workouts</h1>
+      <h1>Start by selecting the exercises you want for your program</h1>
       {exercises.map((exercise) => {
         return (
           <div key={exercise.exercise_id}>
-            <h4>{exercise.name}</h4>
-            <h3>{exercise.bodypart}</h3>
-            <h2>{exercise.target}</h2>
-            <p>{exercise.equipment}</p>
-            <img src={`${exercise.gifurl}`} />
+            <h2> {exercise.name}</h2>
+            <h3>Bodypart: {exercise.bodypart}</h3>
+            <h3>Muscle that targets: {exercise.target}</h3>
+            <h3> Equipment: {exercise.equipment}</h3>
+            <img className='gif-container' src={`${exercise.gifurl}`} />
+          
             {props.user && (
-              <button onClick={() => handleAddToCart(exercise)}>
-                Add To Cart
+              <button className="btn-add" onClick={() => handleAddToCart(exercise)}>
+                <h4>Add Exercise</h4>
               </button>
             )}
+            
           </div>
         );
       })}

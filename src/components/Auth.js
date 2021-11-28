@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import "./Auth.css";
 import { useState } from "react";
 import { setUser } from "../redux/authReducer";
 import { setCart } from "../redux/cartReducer";
@@ -33,7 +34,7 @@ const Auth = (props) => {
  
     return (
       <div>
-        <h1>Hola</h1>
+        <h1></h1>
           <input value={email} onChange={(e) => setEmail(e.target.value)} />
           <input value={password} onChange={(e) => setPassword(e.target.value)} />
           <button onClick={handleLogin}>Login</button>

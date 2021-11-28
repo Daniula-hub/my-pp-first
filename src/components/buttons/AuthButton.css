@@ -20,7 +20,7 @@
   background-color: transparent;
   color: #fff;
   padding: 8px 20px;
-  border: 1px solid var(--primary);
+  border: 1px solid yellow;
   transition: all 0.3s ease-out;
 }
 

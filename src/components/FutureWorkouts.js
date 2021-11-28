@@ -1,4 +1,5 @@
 import axios from "axios";
+import "./FutureWorkouts.css";
 import { useState, useEffect } from "react";
 
 const FutureWorkouts = (props) => {
