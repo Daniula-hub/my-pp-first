@@ -6,7 +6,7 @@ const Message = (props) => {
          <div>
               {props.show ? (
                    <p>Successful Payment!</p>
-              ) : <p>Unsuccessful payment!</p>}
+              ) : <p>Unsuccessful Payment!</p>}
 
 
          </div>

@@ -52,7 +52,7 @@ const YourChosenExercises = (props) => {
               <button onClick={() => handleSaveForLater(exercise)}>
                 Save For Later
               </button>
-              <img src={`${exercise.gifurl}`}/>
+              <img src={`${exercise.gifurl}`} alt={`${exercise.name}`}/>
             </div>
         );
       })}

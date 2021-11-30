@@ -24,28 +24,56 @@ const Exercises = (props) => {
       .catch((err) => console.log(err));
   };
 
-  return (
-    <div>
-      {user ? <h1>Start by selecting the exercises you want for your program</h1> : null}
-      {exercises.map((exercise) => {
-        return (
-          <div key={exercise.exercise_id}>
-            <h2> {exercise.name}</h2>
-            <h3>Bodypart: {exercise.bodypart}</h3>
-            <h3>Muscle that targets: {exercise.target}</h3>
-            <h3> Equipment: {exercise.equipment}</h3>
-            <img className='gif-container' src={`${exercise.gifurl}`} />
-          
-            {props.user && (
-              <button className="btn-add" onClick={() => handleAddToCart(exercise)}>
-                <h4>Add Exercise</h4>
-              </button>
-            )}
-            
-          </div>
-        );
-      })}
+  <div className="container-fluid">
+      <div className="row">
+        <div>
+        {exercises.map((exercise) => {
+          return (
+            <div className="card col-md-3">
+              <img className="card-img-top" src={`${exercise.gifurl}`} alt={`${exercise.name}`}/>
+              <div className="card-body">
+                <h5 className="card-title">{exercise.name}</h5>
+                <p className="card-text">Bodypart: {exercise.bodypart}</p>
+                <p className="card-text">Muscle that targets: {exercise.target}</p>
+                <small className="text-muted">Equipment: {exercise.equipment}</small>
+              </div>
+              <div className="card-footer">
+                {props.user && (
+                      <button className="btn-add" onClick={() => handleAddToCart(exercise)}>
+                        <h4>Add Exercise</h4>
+                      </button>
+                )}              
+              </div>
+            </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
+  return (
+    <div className="container-fluid">
+        <div className="row">
+          {user ? <div className="align-items-center"><h1>Start by selecting the exercises you want for your program.</h1></div>: null}
+            {exercises.map((exercise) => {
+              return (
+                  <div className="card col-sm-6 col-md-6 align-items-center">
+                    <img className="card-img-top" src={`${exercise.gifurl}`} alt={`${exercise.name}`} />
+                    <div className="card-body">
+                      <h4 className="card-title" id="cardName">{exercise.name}</h4>
+                      <h5 className="card-text">Bodypart: {exercise.bodypart}</h5>
+                      <h5 className="card-text">Muscle that targets: {exercise.target}</h5>
+                      <h5 className="card-text"> Equipment: {exercise.equipment}</h5>
+                    </div>
+                    {props.user && (
+                      <button className="btn-add" onClick={() => handleAddToCart(exercise)}>
+                        <h4>Add Exercise</h4>
+                      </button>
+                    )}
+                  </div>              
+              );
+            })}
+        </div>
+      </div>
   );
 };
 

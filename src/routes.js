@@ -2,7 +2,6 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Auth from "./components/Auth";
 import Exercises from "./components/Exercises";
-// import YourChosenExercises from "./components/YourChosenExercises";
 import Programs from "./components/Programs";
 import YourChosenExercises from "./components/YourChosenExercises";
 
@@ -11,9 +10,7 @@ export default (
     <Route exact path="/home" component={Home} />
     <Route path="/auth" component={Auth} />
     <Route path="/exercises" component={Exercises} />
-    {/* <Route path="/yourExercises" component={YourChosenExercises} /> */}
     <Route path="/programs" component={Programs} />
     <Route path="/yourExercises" component={YourChosenExercises} />
-  
   </Switch>
 );

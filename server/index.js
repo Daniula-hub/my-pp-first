@@ -10,6 +10,8 @@ const { CONNECTION_STRING, SESSION_SECRET, SERVER_PORT } = process.env;
 const authCtrl = require("./controllers/authController");
 const exerciseCtrl = require("./controllers/exerciseController");
 const cartCtrl = require("./controllers/cartController");
+const emailCtrl = require("./controllers/emailController");
+
 
 // app instance created
 const app = express();
@@ -39,7 +41,7 @@ app.use(
 );
 
 app.use(express.json());
-
+// app.use(cors())
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 // endpoints
@@ -59,33 +61,32 @@ app.post("/api/cart/:exercise_id", cartCtrl.addToCart);// ej: req.params.exercis
 app.post("/api/createFutureExercises", cartCtrl.createFutureExercises);
 app.post("/api/executePayment", async (req, res) => {
   try {
-    console.log("Estoy aquí 1");
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: req.body.exercises.map(exercise => {
-        console.log("Estoy aquí");
-        return {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: exercise.name
-            },
-            unit_amount: req.body.price
-          },
-          quantity: 1
-        }
-      }),
       mode: 'payment',
-      success_url: `${process.env.SERVER_URL}/succes.html`,
-      cancel_url: `${process.env.SERVER_URL}/cancel.html`
+      line_items: [{
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: req.body.program_name
+          },
+          unit_amount: req.body.price
+        },
+        quantity: 1
+      }],
+      success_url: `${process.env.SERVER_URL}/home`,
+      cancel_url: `${process.env.SERVER_URL}/home`
     })
     res.json({url: session.url})
   } catch (error) {
-    console.log("Llegué al error: ", error);
+    console.log("Llegue al error: ", error);
+    res.status(500).json({ error: error.message})
   }
 });
 app.delete("/api/cart/:exercise_id", cartCtrl.deleteItemFromCart);
 
+//NODEMAILER
+app.post('/sendEmail', emailCtrl.sendEmail)
 
 app.listen(SERVER_PORT, () => console.log(`Server listening on ${SERVER_PORT}`)
 );

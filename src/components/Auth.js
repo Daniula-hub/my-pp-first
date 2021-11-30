@@ -34,11 +34,19 @@ const Auth = (props) => {
  
     return (
       <div>
-        <h1></h1>
-          <input value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input value={password} onChange={(e) => setPassword(e.target.value)} />
-          <button onClick={handleLogin}>Login</button>
-          <button onClick={handleRegister}>Register</button>
+        <form>
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Email address</label>
+            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" />
+            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputPassword1">Password</label>
+            <input type="password" className="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+          </div>
+          <button type="submit" className="btn btn-primary" onClick={handleLogin}>Login</button>
+          <button type="button" className="btn btn-primary" onClick={handleRegister}>Register</button>
+        </form>        
       </div>
     );
 };

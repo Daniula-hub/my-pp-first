@@ -39,7 +39,7 @@ const FutureWorkouts = (props) => {
               >
                 Delete
               </button>
-              <img src={`${exercise.gifurl}`} />
+              <img src={`${exercise.gifurl}`} alt={`${exercise.name}`} />
             </div>
           );
         })}
