@@ -34,7 +34,6 @@
   display: inline-flex;
   margin-top: 5px;
   color: #fff;
-
 }
 
  .fa-typo3 {
@@ -86,7 +85,7 @@ padding-left: 30%;
 
 .menu-icon {
   display: none;
-  left: 50%;
+  left: 80%;
 }
 
 @media screen and (max-width: 960px) {
@@ -171,14 +170,22 @@ padding-left: 30%;
   }
 } 
 
-/* @media screen and (max-width: 700px){
+@media screen and (max-width: 768px){
+
   .fa-dumbbell{
-    width: 40vw;
+    margin-left: 5px;
     margin-top: 1px;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
+    display: flex;
   }
 
-  .navbar-logo h2 {
-    width: 80vw;
-    font-size: small;
-    /* top: 0px; */
+  .navbar-logo {
+    display:inline-flexbox;
+    font-size: 10px;
+  }
+
+  .fa-bars{
+    font-size: 1.5rem;
+    padding-right: 10px;
+  }
+}
