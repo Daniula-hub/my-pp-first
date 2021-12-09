@@ -1,7 +1,55 @@
-h1 {
-    color: black;
+    #title {
+        color: navy;
+        margin-top: 80px;
+        margin-left: 100px;
+        margin-bottom: 50px;
+        display: flex;
+        justify-content: center;
     }
-    
-    h2{
-        margin-top: 30px;
+
+    #indication {
+        color: navy;
+        margin-top: 80px;
+        margin-right: 700px;
     }
+
+    #name {
+        color: 4a4ac1;
+        font-size: xx-large;
+        padding-top: 80px;
+        margin-left: 120px;
+    }
+
+    .btn-del{
+        background-color: gainsboro;
+        border: gray;
+        color: navy;
+        padding: 16px 32px;
+        text-align: center;
+        font-size: 20px;
+        margin: 4px 22px;
+        opacity: 0.6;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        margin-bottom: 40px;
+      }
+
+      .btn-save{
+        background-color: gainsboro;
+        border: gray;
+        color: navy;
+        padding: 16px 32px;
+        text-align: center;
+        font-size: 20px;
+        margin: 4px 22px;
+        opacity: 0.6;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        margin-bottom: 40px;
+      }
+
+      

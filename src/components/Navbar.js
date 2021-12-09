@@ -31,7 +31,7 @@ function Navbar() {
   
       <nav className="navbar">
         <div className="navbar-container">
-          <Link to="/" className="navbar-logo" onClick={closeMobileMenu} >
+          <Link to="/home" className="navbar-logo" onClick={closeMobileMenu} >
           <i className="fas fa-dumbbell"></i> <h2>The Workout App</h2>
           </Link>
           <div className="menu-icon" onClick={handleClick}>

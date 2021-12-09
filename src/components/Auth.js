@@ -32,9 +32,13 @@ const Auth = (props) => {
       .catch((err) => console.log(err));
   };
  
-    return (
-      <div>
-        <form>
+  return (
+    <div >
+        <img className='login-img' src="./img/db.jpeg"></img>
+    <div className="container-fluid">    
+      <div className="row">
+      <div className="col-3"></div>
+        <form className="col-6 auth-form">
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email address</label>
             <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" />
@@ -45,10 +49,13 @@ const Auth = (props) => {
             <input type="password" className="form-control" id="exampleInputPassword1" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
           </div>
           <button type="submit" className="btn btn-primary" onClick={handleLogin}>Login</button>
-          <button type="button" className="btn btn-primary" onClick={handleRegister}>Register</button>
-        </form>        
+          <button type="button" className="btn btn-light" id="right-button" onClick={handleRegister}>Register</button>
+        </form>
       </div>
-    );
+      <div className="col-3"></div>
+    </div>
+    </div>
+  );
 };
 
 export default connect(null, { setUser })(Auth);

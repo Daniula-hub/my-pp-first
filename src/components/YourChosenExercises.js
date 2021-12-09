@@ -42,14 +42,14 @@ const YourChosenExercises = (props) => {
 
   return (
     <div>
-      <h1>You are one step closer to start your transformation.</h1>
-      <h2>Feel free to modify or add more exercises before you select your program! </h2>
+      <h1 className="title-desc" id="title" >You are one step closer to start your transformation.</h1>
+      <h2 className="ex-ind" id="indication" >Feel free to modify or add more exercises before you select your program! </h2>
       {cart.map((exercise) => {
         return (
             <div key={exercise.exercise_id}>
-              <h4>{exercise.name}</h4>
-              <button onClick={() => handleDeleteFromCart(exercise.exercise_id)}> Delete </button>
-              <button onClick={() => handleSaveForLater(exercise)}>
+              <h4 className="ex-name" id="name">{exercise.name}</h4>
+              <button className="btn-del" onClick={() => handleDeleteFromCart(exercise.exercise_id)}> Delete </button>
+              <button className="btn-save"onClick={() => handleSaveForLater(exercise)}>
                 Save For Later
               </button>
               <img src={`${exercise.gifurl}`} alt={`${exercise.name}`}/>

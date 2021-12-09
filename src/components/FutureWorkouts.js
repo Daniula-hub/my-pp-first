@@ -28,13 +28,14 @@ const FutureWorkouts = (props) => {
 
     return (
       <div>
+        <hr />
         <nav className='futureworkouts-container'>
-          <h1>Future Workouts</h1>
+          <h1 className="intro-future" id="future">Future Workouts</h1>
         {futureExercisesList.map((exercise) => {
           return (
             <div key={exercise.exercise_id}>
-              <h4>{exercise.name}</h4>
-              <button
+              <h4 className="ex-name" id="name" >{exercise.name}</h4>
+              <button className="btn-delete"
                 onClick={() => handleDeleteFromCart(exercise.exercise_id)}
               >
                 Delete

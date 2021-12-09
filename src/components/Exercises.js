@@ -53,7 +53,7 @@ const Exercises = (props) => {
   return (
     <div className="container-fluid">
         <div className="row">
-          {user ? <div className="align-items-center"><h1>Start by selecting the exercises you want for your program.</h1></div>: null}
+          {user ? <div ><h1 className="align-items-center" id="select">Start by selecting the exercises you want for your program.</h1></div>: null}
             {exercises.map((exercise) => {
               return (
                   <div className="card col-sm-6 col-md-6 align-items-center">

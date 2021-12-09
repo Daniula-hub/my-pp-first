@@ -1,61 +1,35 @@
-h1 {
-    margin-top: 65px;
-    color: black;
-    display: inline-block;
-    text-align: center;
-  }
+#select {
+  color: navy;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+  margin-top: 60px;
+  margin-left: 100px;
+}
   
   #cardName {
     color:rgb(74, 74, 193);
   }
   
-  /* h5 {
-    font-size: 40px;
-    margin-bottom: 10px;
-    color: black;
+  .card-img-top {
+    height: 25rem;
+    max-width: 15rem;
   }
-  
-  h6 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: black;
-  } */
-  
-  img {
-    height: 40rem;
-    max-width: 25rem;
-  }
-  
-  .card {
-    margin: 3 em !important;
-  }
-  
-  .gif-container {
-    background-color: transparent;
-    color: #fff;
-    padding: 8px 20px;
-    border: 0.5px inset grey;
-    transition: all 0.3s ease-out;
-    max-width: 25rem;
-    width: 25rem;
-    margin: 3em;
-  }
-  
-  .ex-container {
-    background-color: transparent;
-    color: #fff;
-    padding: 8px 20px;
-    border: 1px solid green;
-    transition: all 0.3s ease-out;
-  }
-  
+    
   .btn-add {
-    color: black;
-    padding: 5px 5px;
-    border: 2px solid grey;
-    background-color: white;
+    background-color: gainsboro;
+    border: gray;
+    color: navy;
+    padding: 16px 32px;
+    text-align: center;
+    font-size: 20px;
+    margin: 4px 22px;
+    opacity: 0.6;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
     cursor: pointer;
-    margin-bottom: 2rem;
+    margin-bottom: 40px;
   }
   
   h4 {
@@ -63,3 +37,26 @@ h1 {
     top: 20px;
     bottom: 10px;
   }
+
+    /* .card {
+    margin: 2 em important;
+  } */
+  
+  /* .gif-container {
+    background-color: transparent;
+    color: #fff;
+    padding: 8px 20px;
+    border: 1.5px inset grey;
+    transition: all 0.3s ease-out;
+    max-width: 15rem;
+    width: 15rem;
+    margin: 5em;
+  } */
+  
+  /* .ex-container {
+    background-color: transparent;
+    color: #fff;
+    padding: 8px 20px;
+    border: 1px solid green;
+    transition: all 0.3s ease-out;
+  } */
